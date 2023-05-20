@@ -91,9 +91,9 @@ class _GameScreenState extends State<GameScreen> {
             turn: turn,
             isWinner: isWinner,
           ),
-          RefreshButton(
-            resetGame: resetGame,
-          ),
+          // RefreshButton(
+          //   resetGame: resetGame,
+          // ),
         ],
       ),
     );
@@ -229,17 +229,8 @@ class GameBoard extends StatelessWidget {
   }
 }
 
-class RefreshButton extends StatelessWidget {
-  const RefreshButton({required this.resetGame,});
-
-  final Function resetGame;
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton.icon(
-      onPressed: () => resetGame(),
-      icon: Icon(Icons.replay),
-      label: Text("Repeat game"),
-    );
-  }
-}
+// Write a class RefreshButton which extends StatelessWidget
+// which accepts parameter resetGame as Function
+// and returning Widget with ElevatedButton.icon
+// and onPress calling function resetGame
+// with icon as Icon(Icons.replay)
