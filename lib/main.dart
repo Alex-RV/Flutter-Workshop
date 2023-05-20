@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/game_logic.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 void main() => runApp(TicTacToe());
 
@@ -22,8 +21,6 @@ class GameScreen extends StatefulWidget {
   @override
   State<GameScreen> createState() => _GameScreenState();
 }
-
-// ##TODO: add line when player winning the game
 
 class _GameScreenState extends State<GameScreen> {
   String lastValue = "X";
@@ -70,7 +67,6 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //tell about difference between double and int
     // double boardWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 5, 2, 77),
@@ -154,13 +150,6 @@ class TurnDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          "It's ".toUpperCase(),
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 58,
-          ),
-        ),
         SizedBox(
           width: 100,
           height: 100,
