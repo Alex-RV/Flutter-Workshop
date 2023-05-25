@@ -186,13 +186,32 @@ class GameBoard extends StatelessWidget {
       width: boardWidth,
       height: boardWidth,
       child: GridView.count(
-          crossAxisCount: 3,
-          padding: EdgeInsets.all(16.0),
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
-          children: List.generate(9, (index) {
-            return Text("Hello World");
-          })),
+        crossAxisCount: 3,
+        padding: EdgeInsets.all(16.0),
+        mainAxisSpacing: 8.0,
+        crossAxisSpacing: 8.0,
+        children: List.generate(9, (index) {
+          final boardValue = game.board[index];
+          final isPlayable = !gameOver && boardValue.isEmpty;
+          return InkWell(
+            onTap: isPlayable ? () => onTap(index) : null,
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 1, 37, 169),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: boardValue.isEmpty
+                    ? Text('')
+                    : game.board[index] == "X"
+                        ? Image.asset('assets/images/cross.png')
+                        : Image.asset('assets/images/circle.png'),
+
+            ),
+          );
+        }),
+      ),
     );
   }
 }

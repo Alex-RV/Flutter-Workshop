@@ -67,13 +67,15 @@ class _GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //tell about difference between double and int
+    // double boardWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 5, 2, 77),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TurnDisplay(lastValue: lastValue),
+          TurnDisplay(lastValue: lastValue, gameOver: gameOver, ),
           GameBoard(
             game: game,
             gameOver: gameOver,
@@ -139,32 +141,42 @@ class ResultDisplay extends StatelessWidget {
 }
 
 class TurnDisplay extends StatelessWidget {
-  const TurnDisplay({required this.lastValue});
+  const TurnDisplay({required this.lastValue, required this.gameOver});
 
   final String lastValue;
+  final bool gameOver;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 100,
-          height: 100,
-          child: lastValue == "X"
-              ? Image.asset('assets/images/cross.png')
-              : Image.asset('assets/images/circle.png'),
-        ),
-        Text(
-          " turn",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 58,
-          ),
-        ),
-      ],
-    );
+    return Visibility(
+        visible: !gameOver,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "It's ".toUpperCase(),
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 58,
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: lastValue == "X"
+                  ? Image.asset('assets/images/cross.png')
+                  : Image.asset('assets/images/circle.png'),
+            ),
+            Text(
+              " turn",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 58,
+              ),
+            ),
+          ],
+        ));
   }
 }
 
@@ -190,14 +202,14 @@ class GameBoard extends StatelessWidget {
         padding: EdgeInsets.all(16.0),
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
-        children: List.generate(Game.boardLength, (index) {
+        children: List.generate(9, (index) {
           final boardValue = game.board[index];
           final isPlayable = !gameOver && boardValue.isEmpty;
           return InkWell(
             onTap: isPlayable ? () => onTap(index) : null,
             child: Container(
-              width: Game.blockSize,
-              height: Game.blockSize,
+              width: 100,
+              height: 100,
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 1, 37, 169),
                 borderRadius: BorderRadius.circular(16),
@@ -222,3 +234,4 @@ class GameBoard extends StatelessWidget {
 // and returning Widget with ElevatedButton.icon
 // and onPress calling function resetGame
 // with icon as Icon(Icons.replay)
+

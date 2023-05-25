@@ -5,8 +5,6 @@ class Player {
 }
 
 class Game {
-  static const boardLength = 9;
-  static const double blockSize = 100.0;
 
   //Empty board
   late List<String> board;
@@ -20,7 +18,7 @@ class Game {
   }
 
   static List<String> initGameBoard() =>
-      List.generate(boardLength, (index) => Player.empty);
+      List.generate(9, (index) => Player.empty);
 
   bool winnerCheck(String player, int index) {
     // Define the winning patterns
