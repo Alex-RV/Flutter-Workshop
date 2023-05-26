@@ -16,6 +16,7 @@ class TicTacToe extends StatelessWidget {
 }
 
 class GameScreen extends StatelessWidget {
+  // COPY & PASTE THIS
   String lastValue = "X";
   bool gameOver = false;
   int turn = 0; // to check the draw
@@ -53,6 +54,7 @@ class GameScreen extends StatelessWidget {
     result = "";
     isWinner = false;
   }
+  //
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,11 @@ class GameScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          // ADD THIS
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
+            game: game,
           ),
         ],
       ),
@@ -72,14 +76,17 @@ class GameScreen extends StatelessWidget {
   }
 }
 
+// ADD THIS
 class GameBoard extends StatelessWidget {
   const GameBoard({
     required this.gameOver,
     required this.onTap,
+    required this.game,
   });
 
   final bool gameOver;
   final Function(int) onTap;
+  final Game game;
 
   @override
   Widget build(BuildContext context) {
@@ -93,11 +100,12 @@ class GameBoard extends StatelessWidget {
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
         children: List.generate(9, (index) {
-          return Text(
-            "Hello World",
-            style: TextStyle(color: Colors.white),
-          );
-        }),
+           return Text(
+             "Hello World",
+             style: TextStyle(color: Colors.white),
+           );
+         }
+),
       ),
     );
   }

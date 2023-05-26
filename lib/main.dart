@@ -4,7 +4,7 @@ import 'package:tictactoe/game_logic.dart';
 void main() => runApp(TicTacToe());
 
 class TicTacToe extends StatelessWidget {
-  const TicTacToe({super.key});
+  const TicTacToe({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,7 @@ class TicTacToe extends StatelessWidget {
   }
 }
 
-class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
-
-  @override
-  State<GameScreen> createState() => _GameScreenState();
-}
-
-class _GameScreenState extends State<GameScreen> {
+class GameScreen extends StatelessWidget {
   String lastValue = "X";
   bool gameOver = false;
   int turn = 0; // to check the draw
@@ -33,36 +26,34 @@ class _GameScreenState extends State<GameScreen> {
 
   void onTap(int index) {
     if (game.board[index] == "") {
-      setState(() {
-        game.board[index] = lastValue;
-        turn++;
-        gameOver = game.winnerCheck(lastValue, index);
+      print("Changing $game.board[index]");
+      game.board[index] = lastValue;
+      turn++;
+      gameOver = game.winnerCheck(lastValue, index);
 
-        if (gameOver) {
-          result = " is the Winner";
-          isWinner = true;
-        } else if (!gameOver && turn == 9) {
-          result = "It's a Draw!";
-          gameOver = true;
-        }
-        if (lastValue == "X") {
-          lastValue = "O";
-        } else {
-          lastValue = "X";
-        }
-      });
+      if (gameOver) {
+        result = " is the Winner";
+        isWinner = true;
+      } else if (!gameOver && turn == 9) {
+        result = "It's a Draw!";
+        gameOver = true;
+      }
+      if (lastValue == "X") {
+        lastValue = "O";
+      } else {
+        lastValue = "X";
+      }
+      print("Changing ${game.board[index]}"); // ADD THIS
     }
   }
 
   void resetGame() {
-    setState(() {
-      game.resetBoard();
-      lastValue = "X";
-      gameOver = false;
-      turn = 0;
-      result = "";
-      isWinner = false;
-    });
+    game.resetBoard();
+    lastValue = "X";
+    gameOver = false;
+    turn = 0;
+    result = "";
+    isWinner = false;
   }
 
   @override
@@ -73,111 +64,27 @@ class _GameScreenState extends State<GameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TurnDisplay(lastValue: lastValue),
           GameBoard(
-            game: game,
             gameOver: gameOver,
             onTap: onTap,
+            game: game,
           ),
-          ResultDisplay(
-            gameOver: gameOver,
-            lastValue: lastValue,
-            result: result,
-            turn: turn,
-            isWinner: isWinner,
-          ),
-          // RefreshButton(
-          //   resetGame: resetGame,
-          // ),
         ],
       ),
     );
   }
 }
 
-class ResultDisplay extends StatelessWidget {
-  const ResultDisplay(
-      {required this.lastValue,
-      required this.gameOver,
-      required this.result,
-      required this.turn,
-      required this.isWinner});
-
-  final String lastValue;
-  final bool gameOver;
-  final String result;
-  final int turn;
-  final bool isWinner;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Visibility(
-          visible: isWinner,
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: lastValue == "O"
-                ? Image.asset('assets/images/cross.png')
-                : Image.asset('assets/images/circle.png'),
-          ),
-        ),
-        Text(
-          (turn == 9)
-              ? result
-              : gameOver
-                  ? result
-                  : "",
-          style: TextStyle(color: Colors.white, fontSize: 50.0),
-        ),
-      ],
-    );
-  }
-}
-
-class TurnDisplay extends StatelessWidget {
-  const TurnDisplay({required this.lastValue});
-
-  final String lastValue;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 100,
-          height: 100,
-          child: lastValue == "X"
-              ? Image.asset('assets/images/cross.png')
-              : Image.asset('assets/images/circle.png'),
-        ),
-        Text(
-          " turn",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 58,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
 class GameBoard extends StatelessWidget {
   const GameBoard({
-    required this.game,
     required this.gameOver,
     required this.onTap,
+    required this.game,
   });
 
-  final Game game;
   final bool gameOver;
   final Function(int) onTap;
+  final Game game;
 
   @override
   Widget build(BuildContext context) {
@@ -202,12 +109,15 @@ class GameBoard extends StatelessWidget {
                 color: Color.fromARGB(255, 1, 37, 169),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: boardValue.isEmpty
+              // ADD THIS
+              child: Center(
+                child: boardValue.isEmpty
                     ? Text('')
                     : game.board[index] == "X"
                         ? Image.asset('assets/images/cross.png')
                         : Image.asset('assets/images/circle.png'),
-
+              ),
+              //
             ),
           );
         }),
@@ -215,9 +125,3 @@ class GameBoard extends StatelessWidget {
     );
   }
 }
-
-// Write a class RefreshButton which extends StatelessWidget
-// which accepts parameter resetGame as Function
-// and returning Widget with ElevatedButton.icon
-// and onPress calling function resetGame
-// with icon as Icon(Icons.replay)
