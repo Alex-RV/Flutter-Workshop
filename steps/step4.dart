@@ -45,15 +45,6 @@ class GameScreen extends StatelessWidget {
       }
     }
   }
-
-  void resetGame() {
-    game.resetBoard();
-    lastValue = "X";
-    gameOver = false;
-    turn = 0;
-    result = "";
-    isWinner = false;
-  }
   //
 
   @override

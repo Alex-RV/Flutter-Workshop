@@ -15,7 +15,17 @@ class TicTacToe extends StatelessWidget {
   }
 }
 
-class GameScreen extends StatelessWidget {
+// ADD THIS
+class GameScreen extends StatefulWidget {
+ const GameScreen({super.key});
+
+ @override
+ State<GameScreen> createState() => _GameScreenState();
+}
+//
+
+
+class _GameScreenState extends State<GameScreen> { // CHANGE THIS NAME
   String lastValue = "X";
   bool gameOver = false;
   int turn = 0; // to check the draw
@@ -26,34 +36,26 @@ class GameScreen extends StatelessWidget {
 
   void onTap(int index) {
     if (game.board[index] == "") {
-      print("Changing $game.board[index]");
-      game.board[index] = lastValue;
-      turn++;
-      gameOver = game.winnerCheck(lastValue, index);
+      setState(() {
+        game.board[index] = lastValue;
+        turn++;
+        gameOver = game.winnerCheck(lastValue, index);
 
-      if (gameOver) {
-        result = " is the Winner";
-        isWinner = true;
-      } else if (!gameOver && turn == 9) {
-        result = "It's a Draw!";
-        gameOver = true;
-      }
-      if (lastValue == "X") {
-        lastValue = "O";
-      } else {
-        lastValue = "X";
-      }
-      print("Changing ${game.board[index]}"); // ADD THIS
+        if (gameOver) {
+          result = " is the Winner";
+          isWinner = true;
+        } else if (!gameOver && turn == 9) {
+          result = "It's a Draw!";
+          gameOver = true;
+        }
+        if (lastValue == "X") {
+          lastValue = "O";
+        } else {
+          lastValue = "X";
+        }
+        print("Changing ${game.board[index]}");
+      });
     }
-  }
-
-  void resetGame() {
-    game.resetBoard();
-    lastValue = "X";
-    gameOver = false;
-    turn = 0;
-    result = "";
-    isWinner = false;
   }
 
   @override
@@ -109,7 +111,6 @@ class GameBoard extends StatelessWidget {
                 color: Color.fromARGB(255, 1, 37, 169),
                 borderRadius: BorderRadius.circular(16),
               ),
-              // ADD THIS
               child: Center(
                 child: boardValue.isEmpty
                     ? Text('')
