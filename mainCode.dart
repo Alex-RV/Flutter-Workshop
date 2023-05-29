@@ -155,7 +155,7 @@ class TurnDisplay extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "It's ".toUpperCase(),
+              "It's ",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 58,
@@ -193,7 +193,7 @@ class GameBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boardWidth = MediaQuery.of(context).size.shortestSide * 0.9;
+    double boardWidth = MediaQuery.of(context).size.shortestSide;
     return SizedBox(
       width: boardWidth,
       height: boardWidth,

@@ -90,7 +90,7 @@ class GameBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boardWidth = MediaQuery.of(context).size.shortestSide * 0.9;
+    double boardWidth = MediaQuery.of(context).size.shortestSide;
     return SizedBox(
       width: boardWidth,
       height: boardWidth,

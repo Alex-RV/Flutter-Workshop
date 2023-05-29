@@ -15,17 +15,14 @@ class TicTacToe extends StatelessWidget {
   }
 }
 
-// ADD THIS
 class GameScreen extends StatefulWidget {
  const GameScreen({super.key});
 
  @override
  State<GameScreen> createState() => _GameScreenState();
 }
-//
 
-
-class _GameScreenState extends State<GameScreen> { // CHANGE THIS NAME
+class _GameScreenState extends State<GameScreen> {
   String lastValue = "X";
   bool gameOver = false;
   int turn = 0; // to check the draw
@@ -66,6 +63,7 @@ class _GameScreenState extends State<GameScreen> { // CHANGE THIS NAME
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          TurnDisplay(lastValue: lastValue,),
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
@@ -90,7 +88,7 @@ class GameBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double boardWidth = MediaQuery.of(context).size.shortestSide * 0.9;
+    double boardWidth = MediaQuery.of(context).size.shortestSide;
     return SizedBox(
       width: boardWidth,
       height: boardWidth,
@@ -118,11 +116,30 @@ class GameBoard extends StatelessWidget {
                         ? Image.asset('assets/images/cross.png')
                         : Image.asset('assets/images/circle.png'),
               ),
-              //
             ),
           );
         }),
       ),
     );
+  }
+}
+
+class TurnDisplay extends StatelessWidget {
+  const TurnDisplay({required this.lastValue});
+
+  final String lastValue;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "It's <someone> turn",
+              style: TextStyle(color: Colors.white),
+            ),
+          ],
+        );
   }
 }
