@@ -18,7 +18,7 @@ class TicTacToe extends StatelessWidget {
 class GameScreen extends StatelessWidget {
   String lastValue = "X";
   bool gameOver = false;
-  int turn = 0; // to check the draw
+  int turn = 0;
   String result = "";
   bool isWinner = false;
 
@@ -99,7 +99,7 @@ class GameBoard extends StatelessWidget {
                 color: Color.fromARGB(255, 1, 37, 169),
                 borderRadius: BorderRadius.circular(16),
               ),
-              // ADD THIS
+              // ADDED THIS
               child: Center(
                 child: boardValue.isEmpty
                     ? Text('')

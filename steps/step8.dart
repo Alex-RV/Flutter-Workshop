@@ -25,7 +25,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   String lastValue = "X";
   bool gameOver = false;
-  int turn = 0; // to check the draw
+  int turn = 0; 
   String result = "";
   bool isWinner = false;
 
@@ -63,7 +63,7 @@ class _GameScreenState extends State<GameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TurnDisplay(lastValue: lastValue,),
+          TurnDisplay(lastValue: lastValue,),// ADDED THIS
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
@@ -124,6 +124,7 @@ class GameBoard extends StatelessWidget {
   }
 }
 
+// ADDED THIS
 class TurnDisplay extends StatelessWidget {
   const TurnDisplay({required this.lastValue});
 

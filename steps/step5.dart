@@ -18,7 +18,7 @@ class TicTacToe extends StatelessWidget {
 class GameScreen extends StatelessWidget {
   String lastValue = "X";
   bool gameOver = false;
-  int turn = 0; // to check the draw
+  int turn = 0;
   String result = "";
   bool isWinner = false;
 
@@ -87,7 +87,7 @@ class GameBoard extends StatelessWidget {
         mainAxisSpacing: 8.0,
         crossAxisSpacing: 8.0,
         children: List.generate(9, (index) {
-          // ADD THIS
+          // ADDED THIS
           final boardValue = game.board[index];
           final isPlayable = !gameOver && boardValue.isEmpty;
           return InkWell(

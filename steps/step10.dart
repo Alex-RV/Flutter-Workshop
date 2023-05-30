@@ -69,6 +69,7 @@ class _GameScreenState extends State<GameScreen> {
             onTap: onTap,
             game: game,
           ),
+          // ADDED THIS
           ResultDisplay(lastValue: lastValue, result: result, isWinner: isWinner),
         ],
       ),
@@ -162,6 +163,7 @@ class TurnDisplay extends StatelessWidget {
   }
 }
 
+// ADDED THIS
 class ResultDisplay extends StatelessWidget {
   const ResultDisplay(
       {required this.lastValue,

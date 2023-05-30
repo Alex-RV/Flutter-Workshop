@@ -55,7 +55,7 @@ class GameScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          // ADD THIS
+          // ADDED THIS
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
@@ -67,7 +67,7 @@ class GameScreen extends StatelessWidget {
   }
 }
 
-// ADD THIS
+// ADDED THIS
 class GameBoard extends StatelessWidget {
   const GameBoard({
     required this.gameOver,

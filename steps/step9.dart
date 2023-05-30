@@ -25,7 +25,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   String lastValue = "X";
   bool gameOver = false;
-  int turn = 0; // to check the draw
+  int turn = 0; 
   String result = "";
   bool isWinner = false;
 
@@ -134,7 +134,7 @@ class TurnDisplay extends StatelessWidget {
     return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
+          children: [ // ADDED THIS
             Text(
               "It's ",
               style: TextStyle(

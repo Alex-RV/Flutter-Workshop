@@ -16,10 +16,10 @@ class TicTacToe extends StatelessWidget {
 }
 
 class GameScreen extends StatefulWidget {
-  const GameScreen({super.key});
+ const GameScreen({super.key});
 
-  @override
-  State<GameScreen> createState() => _GameScreenState();
+ @override
+ State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
@@ -63,9 +63,7 @@ class _GameScreenState extends State<GameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TurnDisplay(
-            lastValue: lastValue,
-          ),
+          TurnDisplay(lastValue: lastValue,),
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
@@ -135,32 +133,32 @@ class TurnDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          "It's ",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 58,
-          ),
-        ),
-        SizedBox(
-          width: 100,
-          height: 100,
-          child: lastValue == "X"
-              ? Image.asset('assets/images/cross.png')
-              : Image.asset('assets/images/circle.png'),
-        ),
-        Text(
-          " turn",
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 58,
-          ),
-        ),
-      ],
-    );
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "It's ",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 58,
+              ),
+            ),
+            SizedBox(
+              width: 100,
+              height: 100,
+              child: lastValue == "X"
+                  ? Image.asset('assets/images/cross.png')
+                  : Image.asset('assets/images/circle.png'),
+            ),
+            Text(
+              " turn",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 58,
+              ),
+            ),
+          ],
+        );
   }
 }
 
@@ -180,7 +178,7 @@ class ResultDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Visibility(
+        Visibility(// ADDED THIS
           visible: isWinner,
           child: SizedBox(
             width: 50,
