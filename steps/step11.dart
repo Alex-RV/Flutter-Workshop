@@ -179,8 +179,18 @@ class ResultDisplay extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Visibility(
-          visible: isWinner, 
-          child: Text("Hello world!"),
+          visible: isWinner,
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: lastValue == "O"
+                ? Image.asset('assets/images/cross.png')
+                : Image.asset('assets/images/circle.png'),
+          ),
+        ),
+        Text(
+          result,
+          style: TextStyle(color: Colors.white, fontSize: 50.0),
         ),
       ],
     );

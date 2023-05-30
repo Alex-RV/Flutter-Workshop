@@ -71,6 +71,7 @@ class _GameScreenState extends State<GameScreen> {
             onTap: onTap,
             game: game,
           ),
+          ResultDisplay(lastValue: lastValue, result: result, isWinner: isWinner),
         ],
       ),
     );
@@ -157,6 +158,41 @@ class TurnDisplay extends StatelessWidget {
             color: Colors.white,
             fontSize: 58,
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class ResultDisplay extends StatelessWidget {
+  const ResultDisplay(
+      {required this.lastValue,
+      required this.result,
+      required this.isWinner});
+
+  final String lastValue;
+  final String result;
+  final bool isWinner;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Visibility(
+          visible: isWinner,
+          child: SizedBox(
+            width: 50,
+            height: 50,
+            child: lastValue == "O"
+                ? Image.asset('assets/images/cross.png')
+                : Image.asset('assets/images/circle.png'),
+          ),
+        ),
+        Text(
+          result,
+          style: TextStyle(color: Colors.white, fontSize: 50.0),
         ),
       ],
     );
