@@ -70,7 +70,7 @@ class _GameScreenState extends State<GameScreen> {
             game: game,
           ),
           // ADDED THIS
-          ResultDisplay(lastValue: lastValue, result: result, isWinner: isWinner),
+          ResultDisplay( isWinner: isWinner),
         ],
       ),
     );
@@ -165,13 +165,7 @@ class TurnDisplay extends StatelessWidget {
 
 // ADDED THIS
 class ResultDisplay extends StatelessWidget {
-  const ResultDisplay(
-      {required this.lastValue,
-      required this.result,
-      required this.isWinner});
-
-  final String lastValue;
-  final String result;
+  const ResultDisplay({required this.isWinner});
   final bool isWinner;
 
   @override

@@ -178,8 +178,9 @@ class ResultDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Visibility(// ADDED THIS
+        Visibility(
           visible: isWinner,
+          // ADDED THIS
           child: SizedBox(
             width: 50,
             height: 50,

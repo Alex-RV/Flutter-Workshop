@@ -16,10 +16,10 @@ class TicTacToe extends StatelessWidget {
 }
 
 class GameScreen extends StatefulWidget {
- const GameScreen({super.key});
+  const GameScreen({super.key});
 
- @override
- State<GameScreen> createState() => _GameScreenState();
+  @override
+  State<GameScreen> createState() => _GameScreenState();
 }
 
 class _GameScreenState extends State<GameScreen> {
@@ -55,6 +55,17 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
+  void resetGame() {
+    setState(() {
+      game.resetBoard();
+      lastValue = "X";
+      gameOver = false;
+      turn = 0;
+      result = "";
+      isWinner = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +74,21 @@ class _GameScreenState extends State<GameScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TurnDisplay(lastValue: lastValue,),
+          TurnDisplay(
+            lastValue: lastValue,
+            gameOver: gameOver,
+          ),
           GameBoard(
             gameOver: gameOver,
             onTap: onTap,
             game: game,
           ),
-          ResultDisplay(lastValue: lastValue, result: result, isWinner: isWinner),
+          ResultDisplay(
+              lastValue: lastValue, result: result, isWinner: isWinner),
+          RefreshButton(
+            resetGame: resetGame,
+            gameOver: gameOver,
+          ),
         ],
       ),
     );
@@ -126,13 +145,16 @@ class GameBoard extends StatelessWidget {
 }
 
 class TurnDisplay extends StatelessWidget {
-  const TurnDisplay({required this.lastValue});
+  const TurnDisplay({required this.lastValue, required this.gameOver});
 
   final String lastValue;
+  final bool gameOver;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Visibility(
+        visible: !gameOver,
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -158,15 +180,13 @@ class TurnDisplay extends StatelessWidget {
               ),
             ),
           ],
-        );
+        ));
   }
 }
 
 class ResultDisplay extends StatelessWidget {
   const ResultDisplay(
-      {required this.lastValue,
-      required this.result,
-      required this.isWinner});
+      {required this.lastValue, required this.result, required this.isWinner});
 
   final String lastValue;
   final String result;
@@ -178,7 +198,8 @@ class ResultDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Visibility(// ADDED THIS
+        Visibility(
+          // ADDED THIS
           visible: isWinner,
           child: SizedBox(
             width: 50,
@@ -194,5 +215,26 @@ class ResultDisplay extends StatelessWidget {
         ),
       ],
     );
+  }
+}
+
+class RefreshButton extends StatelessWidget {
+  const RefreshButton({
+    required this.resetGame,
+    required this.gameOver,
+  });
+
+  final Function resetGame;
+  final bool gameOver;
+
+  @override
+  Widget build(BuildContext context) {
+    return Visibility(
+        visible: gameOver,
+        child: ElevatedButton.icon(
+          onPressed: () => resetGame(),
+          icon: Icon(Icons.replay),
+          label: Text("Repeat game"),
+        ));
   }
 }
