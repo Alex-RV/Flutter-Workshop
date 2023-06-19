@@ -26,6 +26,7 @@ flutter:
   assets:
     - assets/images/circle.png
     - assets/images/cross.png
+    - assets/icon.png
 
 
 flutter_icons:
